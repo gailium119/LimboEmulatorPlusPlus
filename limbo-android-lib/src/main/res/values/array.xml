@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="keyMapperLabels">
+        <item>@string/threeBySix</item>
+        <item>@string/fourByEight</item>
+        <item>@string/fiveByTen</item>
+    </string-array>
+    <string-array name="keyMapperValues">
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+    <string-array name="keyPressDelayLabels">
+        <item>@string/ms20</item>
+        <item>@string/ms30</item>
+        <item>@string/ms40</item>
+        <item>@string/ms50</item>
+        <item>@string/ms60</item>
+        <item>@string/ms70</item>
+        <item>@string/ms80</item>
+        <item>@string/ms90</item>
+        <item>@string/ms100</item>
+    </string-array>
+    <string-array name="keyPressDelayValues">
+        <item>20</item>
+        <item>30</item>
+        <item>40</item>
+        <item>50</item>
+        <item>60</item>
+        <item>70</item>
+        <item>80</item>
+        <item>90</item>
+        <item>100</item>
+    </string-array>
+
+    <string-array name="mouseButtonDelayLabels">
+        <item>@string/ms20</item>
+        <item>@string/ms30</item>
+        <item>@string/ms40</item>
+        <item>@string/ms50</item>
+        <item>@string/ms60</item>
+        <item>@string/ms70</item>
+        <item>@string/ms80</item>
+        <item>@string/ms90</item>
+        <item>@string/ms100</item>
+    </string-array>
+    <string-array name="mouseButtonDelayValues">
+        <item>20</item>
+        <item>30</item>
+        <item>40</item>
+        <item>50</item>
+        <item>60</item>
+        <item>70</item>
+        <item>80</item>
+        <item>90</item>
+        <item>100</item>
+    </string-array>
+
+    <string-array name="orientationLabels">
+        <item>@string/Auto</item>
+        <item>@string/Landscape</item>
+        <item>@string/LandscapeReverse</item>
+        <item>@string/Portrait</item>
+        <item>@string/PortraitReverse</item>
+    </string-array>
+    <string-array name="orientationValues">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <string-array name="diskCacheLabels">
+        <item>default</item>
+        <item>none</item>
+        <item>writethrough</item>
+        <item>writeback</item>
+        <item>directsync</item>
+        <item>unsafe</item>
+    </string-array>
+    <string-array name="diskCacheValues">
+        <item>default</item>
+        <item>none</item>
+        <item>writethrough</item>
+        <item>writeback</item>
+        <item>directsync</item>
+        <item>unsafe</item>
+    </string-array>
+</resources>
