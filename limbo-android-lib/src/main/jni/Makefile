@@ -25,9 +25,7 @@ CREATE_LIBSDIR=mkdir -p $(NDK_PROJECT_PATH)/libs/$(APP_ABI_DIR)/
 DEL_LIBSDIR=rm -rf $(NDK_PROJECT_PATH)/libs/* \
 	$(NDK_PROJECT_PATH)/jniLibs/* \
 	$(LIMBO_APP_X86)/jniLibs/* \
-	$(LIMBO_APP_ARM)/jniLibs/* \
-	$(LIMBO_APP_PPC)/jniLibs/* \
-	$(LIMBO_APP_SPARC)/jniLibs/*
+	$(LIMBO_APP_ARM)/jniLibs/*
 
 
 INSTALL_GLIB_LIBS=cp -f glib/glib/.libs/*.so \
@@ -53,8 +51,6 @@ SYNC_LIBS=rsync -av --exclude libqemu-system-* ../libs/* ../jniLibs/
 LIMBO_PRJ_ROOT=../../../..
 LIMBO_APP_X86=$(LIMBO_PRJ_ROOT)/limbo-android-x86/src/main
 LIMBO_APP_ARM=$(LIMBO_PRJ_ROOT)/limbo-android-arm/src/main
-LIMBO_APP_PPC=$(LIMBO_PRJ_ROOT)/limbo-android-ppc/src/main
-LIMBO_APP_SPARC=$(LIMBO_PRJ_ROOT)/limbo-android-sparc/src/main
 
 SYNC_LIBS_X86=rsync -av --include='libqemu-system-x86*.so' \
     --include='gdbserver' --include='gdb.setup' \
@@ -65,14 +61,6 @@ SYNC_LIBS_ARM=rsync -av --include='libqemu-system-arm*.so' \
     --include='gdbserver' --include='gdb.setup' \
     --include='*/' --exclude='*' \
     ../libs/ $(LIMBO_APP_ARM)/jniLibs/
-SYNC_LIBS_PPC=rsync -av --include='libqemu-system-ppc*.so' \
-    --include='gdbserver' --include='gdb.setup' \
-    --include='*/' --exclude='*' \
-    ../libs/ $(LIMBO_APP_PPC)/jniLibs/
-SYNC_LIBS_SPARC=rsync -av --include='libqemu-system-sparc*.so' \
-    --include='gdbserver' --include='gdb.setup' \
-    --include='*/' --exclude='*' \
-    ../libs/ $(LIMBO_APP_SPARC)/jniLibs/
 
 COPY_ROMS=-mkdir -p ../assets/roms && cp -rf ./qemu/pc-bios/*.rom \
 ./qemu/pc-bios/*.bin \
@@ -93,10 +81,6 @@ COPY_ASSETS_X86=mkdir -p ../../../../limbo-android-x86/src/main/assets/ && \
     cp -rf ../assets/* ../../../../limbo-android-x86/src/main/assets/
 COPY_ASSETS_ARM=mkdir -p ../../../../limbo-android-arm/src/main/assets/ && \
     cp -rf ../assets/* ../../../../limbo-android-arm/src/main/assets/
-COPY_ASSETS_PPC=mkdir -p ../../../../limbo-android-ppc/src/main/assets/ && \
-    cp -rf ../assets/* ../../../../limbo-android-ppc/src/main/assets/
-COPY_ASSETS_SPARC=mkdir -p ../../../../limbo-android-sparc/src/main/assets/ && \
-    cp -rf ../assets/* ../../../../limbo-android-sparc/src/main/assets/
 
 #RENAME_TUNCTL=mv -f $(NDK_PROJECT_PATH)/libs/$(APP_ABI)/tunctl \
 	$(NDK_PROJECT_PATH)/libs/$(APP_ABI)/libtunctl.so
@@ -244,8 +228,6 @@ clean-qemu:
 	-rm -rf ../assets/roms/* 
 	-rm -rf $(LIMBO_APP_X86)/assets/roms/*
 	-rm -rf $(LIMBO_APP_ARM)/assets/roms/*
-	-rm -rf $(LIMBO_APP_PPC)/assets/roms/*
-	-rm -rf $(LIMBO_APP_SPARC)/assets/roms/*
 
 config-deps: ndk config-ffi config-glib config-pixman
 
@@ -277,10 +259,6 @@ install:
 	$(COPY_ASSETS_X86)
 	$(SYNC_LIBS_ARM)
 	$(COPY_ASSETS_ARM)
-	$(SYNC_LIBS_PPC)
-	$(COPY_ASSETS_PPC)
-	$(SYNC_LIBS_SPARC)
-	$(COPY_ASSETS_SPARC)
 
 limbo:
 	make ndk
@@ -290,7 +268,7 @@ limbo:
 	make qemu
 	make install
 
-EXPORT_GUEST_ALL=export BUILD_GUEST=x86_64-softmmu,aarch64-softmmu,ppc64-softmmu,sparc-softmmu
+EXPORT_GUEST_ALL=export BUILD_GUEST=x86_64-softmmu,aarch64-softmmu
 
 #most common combinations
 all:
@@ -320,7 +298,7 @@ clean:
 	
 help:
 	@echo " Usage: export BUILD_GUEST=<emu-arch>-softmmu && export BUILD_HOST=<eabi> && make limbo"
-	@echo "  emu-arch (emulator): x86_64, aarch64, ppc64, sparc"
+	@echo "  emu-arch (emulator): x86_64 (x86 compatible), aarch64 (armv7 compatible)"
 	@echo "  eabi (device): armeabi-v7a, arm64-v8a, x86, x86_64"
 	@echo "  optional: export NDK_DEBUG=1 for debuggable binaries"
 	@echo " example: export BUILD_GUEST=x86_64-softmmu && export BUILD_HOST=armeabi-v7a && make limbo"
